@@ -77,20 +77,20 @@ public class ProductionOrderApplication implements ApplicationStarter {
 
   @Bean
   @Public
-  public Role purchaseRequestAccepter() {
-    return Roles.PURCHASE_REQUEST_ACCEPTER;
+  public Role productionOrderAccepter() {
+    return Roles.PRODUCTION_ODER_ACCEPTER;
   }
 
   @Bean
   @Public
-  public Role purchaseRequestManager() {
-    return Roles.PURCHASE_REQUEST_MANAGER;
+  public Role productionOrderManager() {
+    return Roles.PRODUCTION_ODER_MANAGER;
   }
 
   @Bean
   @Public
-  public Role purchaseRequester() {
-    return Roles.PURCHASE_REQUESTER;
+  public Role productionOrderer() {
+    return Roles.PRODUCTION_ODERER;
   }
 
   @Override
