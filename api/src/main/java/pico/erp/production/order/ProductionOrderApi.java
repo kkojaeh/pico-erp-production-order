@@ -13,9 +13,9 @@ public final class ProductionOrderApi {
   @RequiredArgsConstructor
   public enum Roles implements Role {
 
-    PURCHASE_REQUESTER,
-    PURCHASE_REQUEST_ACCEPTER,
-    PURCHASE_REQUEST_MANAGER;
+    PRODUCTION_ODERER,
+    PRODUCTION_ODER_ACCEPTER,
+    PRODUCTION_ODER_MANAGER;
 
     @Id
     @Getter
