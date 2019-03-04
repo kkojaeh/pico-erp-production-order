@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
-import pico.erp.item.spec.ItemSpecId;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
 import pico.erp.shared.TypeDefinitions;
@@ -82,6 +81,25 @@ public interface ProductionOrderRequests {
     @Valid
     @NotNull
     UserId ordererId;
+
+    public static CreateRequest from(ProductionOrderData data) {
+      return CreateRequest.builder()
+        .id(data.getId())
+        .itemId(data.getItemId())
+        .itemSpecCode(data.getItemSpecCode())
+        .processId(data.getProcessId())
+        .quantity(data.getQuantity())
+        .spareQuantity(data.getSpareQuantity())
+        .unit(data.getUnit())
+        .projectId(data.getProjectId())
+        .dueDate(data.getDueDate())
+        .receiverId(data.getReceiverId())
+        .receiveSiteId(data.getReceiveSiteId())
+        .receiveStationId(data.getReceiveStationId())
+        .remark(data.getRemark())
+        .ordererId(data.getOrdererId())
+        .build();
+    }
 
 
   }
