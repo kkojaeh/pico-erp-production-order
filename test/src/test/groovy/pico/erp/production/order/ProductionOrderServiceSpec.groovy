@@ -133,7 +133,8 @@ class ProductionOrderServiceSpec extends Specification {
     requestService.progress(
       new ProductionOrderRequests.ProgressRequest(
         id: id,
-        progressedQuantity: 50
+        progressedQuantity: 50,
+        erroredQuantity: 5
       )
     )
   }
