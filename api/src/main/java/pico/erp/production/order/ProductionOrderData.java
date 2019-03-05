@@ -36,6 +36,8 @@ public class ProductionOrderData {
 
   BigDecimal spareQuantity;
 
+  BigDecimal progressedQuantity;
+
   UnitKind unit;
 
   UserId ordererId;

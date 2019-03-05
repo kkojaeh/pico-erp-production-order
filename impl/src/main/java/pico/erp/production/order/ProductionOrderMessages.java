@@ -13,7 +13,6 @@ import lombok.Value;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
-import pico.erp.item.spec.ItemSpecId;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
 import pico.erp.shared.TypeDefinitions;
@@ -245,6 +244,10 @@ public interface ProductionOrderMessages {
 
     @Data
     class Request {
+
+      @NotNull
+      @Min(0)
+      BigDecimal progressedQuantity;
 
     }
 

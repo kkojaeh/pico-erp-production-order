@@ -132,7 +132,8 @@ class ProductionOrderServiceSpec extends Specification {
   def progressRequest() {
     requestService.progress(
       new ProductionOrderRequests.ProgressRequest(
-        id: id
+        id: id,
+        progressedQuantity: 50
       )
     )
   }

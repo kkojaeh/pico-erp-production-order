@@ -95,6 +95,7 @@ public abstract class ProductionOrderMapper {
       .itemSpecCode(entity.getItemSpecCode())
       .quantity(entity.getQuantity())
       .spareQuantity(entity.getSpareQuantity())
+      .progressedQuantity(entity.getProgressedQuantity())
       .unit(entity.getUnit())
       .projectId(entity.getProjectId())
       .dueDate(entity.getDueDate())

@@ -244,6 +244,10 @@ public interface ProductionOrderRequests {
     @NotNull
     ProductionOrderId id;
 
+    @NotNull
+    @Min(0)
+    BigDecimal progressedQuantity;
+
   }
 
   @Data

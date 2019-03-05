@@ -26,6 +26,7 @@ create table pdo_production_order (
 	rejected_reason varchar(50),
 	remark varchar(50),
 	spare_quantity decimal(19,2),
+	progressed_quantity decimal(19,2),
 	status varchar(20),
 	unit varchar(20),
 	primary key (id)

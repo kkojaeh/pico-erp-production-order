@@ -12,11 +12,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
-import pico.erp.item.spec.ItemSpecId;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
 import pico.erp.shared.data.UnitKind;
@@ -51,6 +49,8 @@ public class ProductionOrder implements Serializable {
   BigDecimal quantity;
 
   BigDecimal spareQuantity;
+
+  BigDecimal progressedQuantity;
 
   UnitKind unit;
 
@@ -106,6 +106,7 @@ public class ProductionOrder implements Serializable {
     this.remark = request.getRemark();
     this.status = ProductionOrderStatusKind.DRAFT;
     this.ordererId = request.getOrdererId();
+    this.progressedQuantity = BigDecimal.ZERO;
     this.code = request.getCodeGenerator().generate(this);
     return new ProductionOrderMessages.Create.Response(
       Arrays.asList(new ProductionOrderEvents.CreatedEvent(this.id))
@@ -188,6 +189,7 @@ public class ProductionOrder implements Serializable {
     if (!isProgressable()) {
       throw new ProductionOrderExceptions.CannotProgressException();
     }
+    this.progressedQuantity = this.progressedQuantity.add(request.getProgressedQuantity());
     this.status = ProductionOrderStatusKind.IN_PROGRESS;
     return new ProductionOrderMessages.Progress.Response(
       Arrays.asList(new ProductionOrderEvents.ProgressedEvent(this.id))

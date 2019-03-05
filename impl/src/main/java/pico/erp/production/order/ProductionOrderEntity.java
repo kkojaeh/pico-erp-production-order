@@ -30,7 +30,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
-import pico.erp.item.spec.ItemSpecId;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
 import pico.erp.shared.TypeDefinitions;
@@ -85,6 +84,9 @@ public class ProductionOrderEntity implements Serializable {
 
   @Column(precision = 19, scale = 2)
   BigDecimal spareQuantity;
+
+  @Column(precision = 19, scale = 2)
+  BigDecimal progressedQuantity;
 
   @Column(length = TypeDefinitions.ENUM_LENGTH)
   @Enumerated(EnumType.STRING)
