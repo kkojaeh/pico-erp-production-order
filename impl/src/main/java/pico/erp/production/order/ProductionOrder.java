@@ -52,6 +52,8 @@ public class ProductionOrder implements Serializable {
 
   BigDecimal progressedQuantity;
 
+  BigDecimal erroredQuantity;
+
   UnitKind unit;
 
   ProjectId projectId;
@@ -107,6 +109,7 @@ public class ProductionOrder implements Serializable {
     this.status = ProductionOrderStatusKind.DRAFT;
     this.ordererId = request.getOrdererId();
     this.progressedQuantity = BigDecimal.ZERO;
+    this.erroredQuantity = BigDecimal.ZERO;
     this.code = request.getCodeGenerator().generate(this);
     return new ProductionOrderMessages.Create.Response(
       Arrays.asList(new ProductionOrderEvents.CreatedEvent(this.id))
@@ -190,9 +193,15 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotProgressException();
     }
     this.progressedQuantity = this.progressedQuantity.add(request.getProgressedQuantity());
+    this.erroredQuantity = this.erroredQuantity.add(request.getErroredQuantity());
     this.status = ProductionOrderStatusKind.IN_PROGRESS;
     return new ProductionOrderMessages.Progress.Response(
-      Arrays.asList(new ProductionOrderEvents.ProgressedEvent(this.id))
+      Arrays.asList(
+        new ProductionOrderEvents.ProgressedEvent(this.id,
+          request.getProgressedQuantity(),
+          request.getErroredQuantity()
+        )
+      )
     );
   }
 

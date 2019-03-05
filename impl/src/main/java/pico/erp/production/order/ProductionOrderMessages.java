@@ -246,8 +246,10 @@ public interface ProductionOrderMessages {
     class Request {
 
       @NotNull
-      @Min(0)
       BigDecimal progressedQuantity;
+
+      @NotNull
+      BigDecimal erroredQuantity;
 
     }
 

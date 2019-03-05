@@ -1,5 +1,6 @@
 package pico.erp.production.order;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,10 @@ public interface ProductionOrderEvents {
     public final static String CHANNEL = "event.production-order.progressed";
 
     private ProductionOrderId id;
+
+    private BigDecimal progressedQuantity;
+
+    private BigDecimal erroredQuantity;
 
     public String channel() {
       return CHANNEL;

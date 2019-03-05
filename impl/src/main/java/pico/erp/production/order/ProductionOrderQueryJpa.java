@@ -45,6 +45,7 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
       request.quantity,
       request.spareQuantity,
       request.progressedQuantity,
+      request.erroredQuantity,
       request.unit,
       request.ordererId,
       request.accepterId,

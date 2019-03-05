@@ -38,6 +38,8 @@ public class ProductionOrderData {
 
   BigDecimal progressedQuantity;
 
+  BigDecimal erroredQuantity;
+
   UnitKind unit;
 
   UserId ordererId;

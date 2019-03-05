@@ -88,6 +88,9 @@ public class ProductionOrderEntity implements Serializable {
   @Column(precision = 19, scale = 2)
   BigDecimal progressedQuantity;
 
+  @Column(precision = 19, scale = 2)
+  BigDecimal erroredQuantity;
+
   @Column(length = TypeDefinitions.ENUM_LENGTH)
   @Enumerated(EnumType.STRING)
   UnitKind unit;

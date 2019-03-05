@@ -36,6 +36,8 @@ public class ProductionOrderView {
 
   BigDecimal progressedQuantity;
 
+  BigDecimal erroredQuantity;
+
   UnitKind unit;
 
   UserId ordererId;

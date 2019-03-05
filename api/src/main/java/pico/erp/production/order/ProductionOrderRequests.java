@@ -245,8 +245,10 @@ public interface ProductionOrderRequests {
     ProductionOrderId id;
 
     @NotNull
-    @Min(0)
     BigDecimal progressedQuantity;
+
+    @NotNull
+    BigDecimal erroredQuantity;
 
   }
 
