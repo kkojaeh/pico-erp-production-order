@@ -15,7 +15,7 @@ create table pdo_production_order (
 	last_modified_by_id varchar(50),
 	last_modified_by_name varchar(50),
 	last_modified_date datetime,
-	requester_id varchar(50),
+	orderer_id varchar(50),
 	process_id binary(16),
 	project_id binary(16),
 	quantity decimal(19,2),
