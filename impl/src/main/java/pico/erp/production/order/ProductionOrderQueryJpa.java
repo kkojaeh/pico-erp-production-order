@@ -114,6 +114,7 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
     val query = new JPAQuery<ProductionOrderAwaitExecutionView>(entityManager);
     val select = Projections.bean(ProductionOrderAwaitExecutionView.class,
       request.id,
+      request.code,
       request.itemId,
       request.processId,
       request.itemSpecCode,
