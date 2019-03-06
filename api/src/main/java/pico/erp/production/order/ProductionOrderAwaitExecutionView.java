@@ -18,7 +18,7 @@ import pico.erp.warehouse.location.site.SiteId;
 import pico.erp.warehouse.location.station.StationId;
 
 @Data
-public class ProductionOrderAwaitOrderView {
+public class ProductionOrderAwaitExecutionView {
 
   ProductionOrderId id;
 

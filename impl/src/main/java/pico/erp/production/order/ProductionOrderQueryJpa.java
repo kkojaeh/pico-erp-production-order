@@ -109,10 +109,10 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
   }
 
   @Override
-  public Page<ProductionOrderAwaitOrderView> retrieve(ProductionOrderAwaitOrderView.Filter filter,
+  public Page<ProductionOrderAwaitExecutionView> retrieve(ProductionOrderAwaitExecutionView.Filter filter,
     Pageable pageable) {
-    val query = new JPAQuery<ProductionOrderAwaitOrderView>(entityManager);
-    val select = Projections.bean(ProductionOrderAwaitOrderView.class,
+    val query = new JPAQuery<ProductionOrderAwaitExecutionView>(entityManager);
+    val select = Projections.bean(ProductionOrderAwaitExecutionView.class,
       request.id,
       request.itemId,
       request.processId,
@@ -135,7 +135,7 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
 
     val builder = new BooleanBuilder();
 
-    builder.and(request.status.eq(ProductionOrderStatusKind.ACCEPTED));
+    builder.and(request.status.in(ProductionOrderStatusKind.IN_PLANNING, ProductionOrderStatusKind.IN_PROGRESS));
 
     if (filter.getReceiverId() != null) {
       builder.and(request.receiverId.eq(filter.getReceiverId()));

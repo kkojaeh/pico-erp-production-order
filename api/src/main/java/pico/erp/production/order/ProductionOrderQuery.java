@@ -9,7 +9,7 @@ public interface ProductionOrderQuery {
   Page<ProductionOrderView> retrieve(@NotNull ProductionOrderView.Filter filter,
     @NotNull Pageable pageable);
 
-  Page<ProductionOrderAwaitOrderView> retrieve(@NotNull ProductionOrderAwaitOrderView.Filter filter,
+  Page<ProductionOrderAwaitExecutionView> retrieve(@NotNull ProductionOrderAwaitExecutionView.Filter filter,
     @NotNull Pageable pageable);
 
   Page<ProductionOrderAwaitAcceptView> retrieve(
