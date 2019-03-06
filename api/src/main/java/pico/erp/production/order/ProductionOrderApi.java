@@ -13,9 +13,9 @@ public final class ProductionOrderApi {
   @RequiredArgsConstructor
   public enum Roles implements Role {
 
-    PRODUCTION_ODERER,
-    PRODUCTION_ODER_ACCEPTER,
-    PRODUCTION_ODER_MANAGER;
+    PRODUCTION_ORDERER,
+    PRODUCTION_ORDER_ACCEPTER,
+    PRODUCTION_ORDER_MANAGER;
 
     @Id
     @Getter

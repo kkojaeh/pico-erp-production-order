@@ -78,19 +78,19 @@ public class ProductionOrderApplication implements ApplicationStarter {
   @Bean
   @Public
   public Role productionOrderAccepter() {
-    return Roles.PRODUCTION_ODER_ACCEPTER;
+    return Roles.PRODUCTION_ORDER_ACCEPTER;
   }
 
   @Bean
   @Public
   public Role productionOrderManager() {
-    return Roles.PRODUCTION_ODER_MANAGER;
+    return Roles.PRODUCTION_ORDER_MANAGER;
   }
 
   @Bean
   @Public
   public Role productionOrderer() {
-    return Roles.PRODUCTION_ODERER;
+    return Roles.PRODUCTION_ORDERER;
   }
 
   @Override
