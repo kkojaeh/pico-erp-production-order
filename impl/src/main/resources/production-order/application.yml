@@ -88,5 +88,5 @@ flyway:
 
 production-order:
   accepter-group:
-    id: pr-accepter
-    name: 구매요청 접수자
+    id: prdo-accepter
+    name: 생산지시 접수자
