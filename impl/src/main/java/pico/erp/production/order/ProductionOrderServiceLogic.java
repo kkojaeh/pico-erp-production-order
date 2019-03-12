@@ -2,17 +2,15 @@ package pico.erp.production.order;
 
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pico.erp.audit.AuditService;
 import pico.erp.production.order.ProductionOrderRequests.AcceptRequest;
-import pico.erp.production.order.ProductionOrderRequests.CancelProgressRequest;
 import pico.erp.production.order.ProductionOrderRequests.CancelRequest;
 import pico.erp.production.order.ProductionOrderRequests.CommitRequest;
 import pico.erp.production.order.ProductionOrderRequests.CompleteRequest;
 import pico.erp.production.order.ProductionOrderRequests.PlanRequest;
+import pico.erp.production.order.ProductionOrderRequests.PrepareRequest;
 import pico.erp.production.order.ProductionOrderRequests.ProgressRequest;
 import pico.erp.production.order.ProductionOrderRequests.RejectRequest;
 import pico.erp.shared.Public;
@@ -113,7 +111,7 @@ public class ProductionOrderServiceLogic implements ProductionOrderService {
   }
 
   @Override
-  public void cancelProgress(CancelProgressRequest request) {
+  public void progress(ProgressRequest request) {
     val purchaseRequest = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
     val response = purchaseRequest.apply(mapper.map(request));
@@ -122,7 +120,7 @@ public class ProductionOrderServiceLogic implements ProductionOrderService {
   }
 
   @Override
-  public void progress(ProgressRequest request) {
+  public void prepare(PrepareRequest request) {
     val purchaseRequest = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
     val response = purchaseRequest.apply(mapper.map(request));

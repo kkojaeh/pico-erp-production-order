@@ -172,4 +172,8 @@ public class ProductionOrderEntity implements Serializable {
   @LastModifiedDate
   OffsetDateTime lastModifiedDate;
 
+  OffsetDateTime estimatedPreparedDate;
+
+  OffsetDateTime preparedDate;
+
 }

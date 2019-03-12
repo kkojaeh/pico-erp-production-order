@@ -32,7 +32,7 @@ class ProductionOrderServiceSpec extends Specification {
   @Autowired
   ProductionOrderService requestService
 
-  def id = ProductionOrderId.from("request-1")
+  def id = ProductionOrderId.from("order-1")
 
   def unknownId = ProductionOrderId.from("unknown")
 
@@ -74,6 +74,8 @@ class ProductionOrderServiceSpec extends Specification {
 
   def unit = UnitKind.EA
 
+  def estimatedPreparedDate = OffsetDateTime.now().plusDays(5)
+
   def setup() {
     requestService.create(
       new ProductionOrderRequests.CreateRequest(
@@ -91,6 +93,7 @@ class ProductionOrderServiceSpec extends Specification {
         ordererId: ordererId,
         dueDate: dueDate,
         remark: remark,
+        estimatedPreparedDate: estimatedPreparedDate
       )
     )
   }
@@ -156,6 +159,14 @@ class ProductionOrderServiceSpec extends Specification {
     )
   }
 
+  def prepareRequest() {
+    requestService.prepare(
+      new ProductionOrderRequests.PrepareRequest(
+        id: id
+      )
+    )
+  }
+
   def updateRequest() {
     requestService.update(
       new ProductionOrderRequests.UpdateRequest(
@@ -171,6 +182,7 @@ class ProductionOrderServiceSpec extends Specification {
         receiveStationId: receiveStationId2,
         dueDate: dueDate2,
         remark: remark2,
+        estimatedPreparedDate: estimatedPreparedDate
       )
     )
   }
@@ -252,6 +264,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     updateRequest()
@@ -273,6 +286,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     updateRequest()
     then:
@@ -320,6 +334,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     commitRequest()
     then:
@@ -348,6 +363,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     commitRequest()
@@ -385,6 +401,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     acceptRequest()
     then:
@@ -413,6 +430,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     acceptRequest()
@@ -440,6 +458,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     def request = requestService.get(id)
     then:
@@ -451,6 +470,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     progressRequest()
     def request = requestService.get(id)
@@ -518,10 +538,12 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     cancelRequest()
+    def request = requestService.get(id)
     then:
-    thrown(ProductionOrderExceptions.CannotCancelException)
+    request.status == ProductionOrderStatusKind.CANCELED
   }
 
   def "취소 - 반려 후 취소"() {
@@ -538,6 +560,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     cancelRequest()
@@ -576,6 +599,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     rejectRequest()
     then:
@@ -604,6 +628,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     rejectRequest()
@@ -641,6 +666,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     def request = requestService.get(id)
@@ -671,6 +697,7 @@ class ProductionOrderServiceSpec extends Specification {
     commitRequest()
     acceptRequest()
     planRequest()
+    prepareRequest()
     progressRequest()
     completeRequest()
     completeRequest()

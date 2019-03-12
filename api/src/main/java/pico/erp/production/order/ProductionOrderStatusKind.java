@@ -23,7 +23,12 @@ public enum ProductionOrderStatusKind implements LocalizedNameable {
   /**
    * 계획중
    */
-  IN_PLANNING,
+  PLANNED,
+
+  /**
+   * 준비 완료
+   */
+  PREPARED,
 
   /**
    * 진행중
@@ -51,7 +56,7 @@ public enum ProductionOrderStatusKind implements LocalizedNameable {
   }
 
   public boolean isCancelable() {
-    return Arrays.asList(DRAFT, COMMITTED, ACCEPTED, IN_PLANNING).contains(this);
+    return Arrays.asList(DRAFT, COMMITTED, ACCEPTED, PLANNED, PREPARED, IN_PROGRESS).contains(this);
   }
 
   public boolean isCommittable() {
@@ -66,8 +71,8 @@ public enum ProductionOrderStatusKind implements LocalizedNameable {
     return this == ACCEPTED;
   }
 
-  public boolean isProgressable() {
-    return Arrays.asList(IN_PLANNING, IN_PROGRESS).contains(this);
+  public boolean isPreparable() {
+    return Arrays.asList(ACCEPTED, PLANNED).contains(this);
   }
 
   public boolean isRejectable() {
@@ -78,7 +83,9 @@ public enum ProductionOrderStatusKind implements LocalizedNameable {
     return this == DRAFT;
   }
 
-  public boolean isProgressCancelable() {
-    return Arrays.asList(IN_PLANNING, IN_PROGRESS).contains(this);
+  public boolean isProgressable() {
+    return Arrays.asList(PREPARED, IN_PROGRESS).contains(this);
   }
+
+
 }

@@ -59,6 +59,12 @@ public interface ProductionOrderExceptions {
     private static final long serialVersionUID = 1L;
   }
 
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "production-order.cannot.prepare.exception")
+  class CannotPrepareException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+  }
+
   @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "production-order.cannot.cancel-progress.exception")
   class CannotCancelProgressException extends RuntimeException {
 

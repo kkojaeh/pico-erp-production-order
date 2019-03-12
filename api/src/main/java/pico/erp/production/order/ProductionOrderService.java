@@ -23,10 +23,10 @@ public interface ProductionOrderService {
 
   void progress(@Valid @NotNull ProductionOrderRequests.ProgressRequest request);
 
+  void prepare(@Valid @NotNull ProductionOrderRequests.PrepareRequest request);
+
   void update(@Valid @NotNull ProductionOrderRequests.UpdateRequest request);
 
   void reject(@Valid @NotNull ProductionOrderRequests.RejectRequest request);
-
-  void cancelProgress(@Valid @NotNull ProductionOrderRequests.CancelProgressRequest request);
 
 }

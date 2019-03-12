@@ -80,6 +80,9 @@ public interface ProductionOrderMessages {
       UserId ordererId;
 
       @NotNull
+      OffsetDateTime estimatedPreparedDate;
+
+      @NotNull
       ProductionOrderCodeGenerator codeGenerator;
 
     }
@@ -140,6 +143,9 @@ public interface ProductionOrderMessages {
 
       @Size(max = TypeDefinitions.REMARK_LENGTH)
       String remark;
+
+      @NotNull
+      OffsetDateTime estimatedPreparedDate;
 
     }
 
@@ -278,7 +284,7 @@ public interface ProductionOrderMessages {
 
   }
 
-  interface CancelProgress {
+  interface Prepare {
 
     @Data
     class Request {

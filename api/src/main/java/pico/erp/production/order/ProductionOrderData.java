@@ -70,6 +70,10 @@ public class ProductionOrderData {
 
   ProductionOrderStatusKind status;
 
+  OffsetDateTime estimatedPreparedDate;
+
+  OffsetDateTime preparedDate;
+
   String remark;
 
   boolean cancelable;
@@ -88,6 +92,6 @@ public class ProductionOrderData {
 
   boolean plannable;
 
-  boolean progressCancelable;
+  boolean preparable;
 
 }

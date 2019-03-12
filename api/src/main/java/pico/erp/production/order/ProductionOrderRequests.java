@@ -82,6 +82,9 @@ public interface ProductionOrderRequests {
     @NotNull
     UserId ordererId;
 
+    @NotNull
+    OffsetDateTime estimatedPreparedDate;
+
     public static CreateRequest from(ProductionOrderData data) {
       return CreateRequest.builder()
         .id(data.getId())
@@ -98,6 +101,7 @@ public interface ProductionOrderRequests {
         .receiveStationId(data.getReceiveStationId())
         .remark(data.getRemark())
         .ordererId(data.getOrdererId())
+        .estimatedPreparedDate(data.getEstimatedPreparedDate())
         .build();
     }
 
@@ -160,6 +164,9 @@ public interface ProductionOrderRequests {
 
     @Size(max = TypeDefinitions.REMARK_LENGTH)
     String remark;
+
+    @NotNull
+    OffsetDateTime estimatedPreparedDate;
 
   }
 
@@ -257,6 +264,18 @@ public interface ProductionOrderRequests {
   @AllArgsConstructor
   @Builder
   class PlanRequest {
+
+    @Valid
+    @NotNull
+    ProductionOrderId id;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class PrepareRequest {
 
     @Valid
     @NotNull

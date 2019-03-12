@@ -26,6 +26,21 @@ public interface ProductionOrderEvents {
   @Data
   @AllArgsConstructor
   @NoArgsConstructor
+  class PreparedEvent implements Event {
+
+    public final static String CHANNEL = "event.production-order.prepared";
+
+    private ProductionOrderId id;
+
+    public String channel() {
+      return CHANNEL;
+    }
+
+  }
+
+  @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
   class ProgressedEvent implements Event {
 
     public final static String CHANNEL = "event.production-order.progressed";

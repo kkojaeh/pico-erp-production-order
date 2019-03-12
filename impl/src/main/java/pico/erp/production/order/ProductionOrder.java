@@ -86,6 +86,10 @@ public class ProductionOrder implements Serializable {
 
   String rejectedReason;
 
+  OffsetDateTime estimatedPreparedDate;
+
+  OffsetDateTime preparedDate;
+
 
   public ProductionOrder() {
 
@@ -110,6 +114,7 @@ public class ProductionOrder implements Serializable {
     this.ordererId = request.getOrdererId();
     this.progressedQuantity = BigDecimal.ZERO;
     this.erroredQuantity = BigDecimal.ZERO;
+    this.estimatedPreparedDate = request.getEstimatedPreparedDate();
     this.code = request.getCodeGenerator().generate(this);
     return new ProductionOrderMessages.Create.Response(
       Arrays.asList(new ProductionOrderEvents.CreatedEvent(this.id))
@@ -132,6 +137,7 @@ public class ProductionOrder implements Serializable {
     this.receiverId = request.getReceiverId();
     this.receiveSiteId = request.getReceiveSiteId();
     this.receiveStationId = request.getReceiveStationId();
+    this.estimatedPreparedDate = request.getEstimatedPreparedDate();
     this.remark = request.getRemark();
     return new ProductionOrderMessages.Update.Response(
       Arrays.asList(new ProductionOrderEvents.UpdatedEvent(this.id))
@@ -223,20 +229,21 @@ public class ProductionOrder implements Serializable {
     if (!this.isPlannable()) {
       throw new ProductionOrderExceptions.CannotPlanException();
     }
-    this.status = ProductionOrderStatusKind.IN_PLANNING;
+    this.status = ProductionOrderStatusKind.PLANNED;
     return new ProductionOrderMessages.Plan.Response(
       Arrays.asList(new ProductionOrderEvents.PlannedEvent(this.id))
     );
   }
 
-  public ProductionOrderMessages.CancelProgress.Response apply(
-    ProductionOrderMessages.CancelProgress.Request request) {
-    if (!this.isProgressCancelable()) {
-      throw new ProductionOrderExceptions.CannotCancelProgressException();
+  public ProductionOrderMessages.Prepare.Response apply(
+    ProductionOrderMessages.Prepare.Request request) {
+    if (!this.isPreparable()) {
+      throw new ProductionOrderExceptions.CannotPrepareException();
     }
-    this.status = ProductionOrderStatusKind.ACCEPTED;
-    return new ProductionOrderMessages.CancelProgress.Response(
-      Arrays.asList(new ProductionOrderEvents.ProgressCanceledEvent(this.id))
+    this.status = ProductionOrderStatusKind.PREPARED;
+    this.preparedDate = OffsetDateTime.now();
+    return new ProductionOrderMessages.Prepare.Response(
+      Arrays.asList(new ProductionOrderEvents.PreparedEvent(this.id))
     );
   }
 
@@ -246,10 +253,6 @@ public class ProductionOrder implements Serializable {
 
   public boolean isCancelable() {
     return status.isCancelable();
-  }
-
-  public boolean isProgressCancelable() {
-    return status.isProgressCancelable();
   }
 
   public boolean isCommittable() {
@@ -274,6 +277,10 @@ public class ProductionOrder implements Serializable {
 
   public boolean isUpdatable() {
     return status.isUpdatable();
+  }
+
+  public boolean isPreparable() {
+    return status.isPreparable();
   }
 
 

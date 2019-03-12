@@ -113,6 +113,8 @@ public abstract class ProductionOrderMapper {
       .canceledDate(entity.getCanceledDate())
       .status(entity.getStatus())
       .rejectedReason(entity.getRejectedReason())
+      .estimatedPreparedDate(entity.getEstimatedPreparedDate())
+      .preparedDate(entity.getPreparedDate())
       .build();
   }
 
@@ -201,8 +203,8 @@ public abstract class ProductionOrderMapper {
   public abstract ProductionOrderMessages.Plan.Request map(
     ProductionOrderRequests.PlanRequest request);
 
-  public abstract ProductionOrderMessages.CancelProgress.Request map(
-    ProductionOrderRequests.CancelProgressRequest request);
+  public abstract ProductionOrderMessages.Prepare.Request map(
+    ProductionOrderRequests.PrepareRequest request);
 
   public abstract void pass(ProductionOrderEntity from, @MappingTarget ProductionOrderEntity to);
 

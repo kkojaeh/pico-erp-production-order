@@ -66,6 +66,10 @@ public class ProductionOrderView {
 
   ProductionOrderStatusKind status;
 
+  OffsetDateTime estimatedPreparedDate;
+
+  OffsetDateTime preparedDate;
+
   @Data
   @NoArgsConstructor
   @AllArgsConstructor
