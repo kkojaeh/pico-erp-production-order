@@ -34,48 +34,48 @@ public class ProductionOrderServiceLogic implements ProductionOrderService {
 
   @Override
   public void accept(AcceptRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public void cancel(CancelRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public void commit(CommitRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public void complete(CompleteRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public ProductionOrderData create(ProductionOrderRequests.CreateRequest request) {
-    val purchaseRequest = new ProductionOrder();
-    val response = purchaseRequest.apply(mapper.map(request));
-    if (productionOrderRepository.exists(purchaseRequest.getId())) {
+    val productionOrder = new ProductionOrder();
+    val response = productionOrder.apply(mapper.map(request));
+    if (productionOrderRepository.exists(productionOrder.getId())) {
       throw new ProductionOrderExceptions.AlreadyExistsException();
     }
-    val created = productionOrderRepository.create(purchaseRequest);
+    val created = productionOrderRepository.create(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
     return mapper.map(created);
   }
@@ -94,46 +94,46 @@ public class ProductionOrderServiceLogic implements ProductionOrderService {
 
   @Override
   public void plan(PlanRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void reject(RejectRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
-      .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void progress(ProgressRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
-      .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public void prepare(PrepareRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void progress(ProgressRequest request) {
+    val productionOrder = productionOrderRepository.findBy(request.getId())
+      .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void reject(RejectRequest request) {
+    val productionOrder = productionOrderRepository.findBy(request.getId())
+      .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 
   @Override
   public void update(ProductionOrderRequests.UpdateRequest request) {
-    val purchaseRequest = productionOrderRepository.findBy(request.getId())
+    val productionOrder = productionOrderRepository.findBy(request.getId())
       .orElseThrow(ProductionOrderExceptions.NotFoundException::new);
-    val response = purchaseRequest.apply(mapper.map(request));
-    productionOrderRepository.update(purchaseRequest);
+    val response = productionOrder.apply(mapper.map(request));
+    productionOrderRepository.update(productionOrder);
     eventPublisher.publishEvents(response.getEvents());
   }
 }
