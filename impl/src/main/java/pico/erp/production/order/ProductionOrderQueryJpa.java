@@ -131,7 +131,9 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
       order.committedDate,
       order.acceptedDate,
       order.dueDate,
-      order.createdDate
+      order.createdDate,
+      order.preparedDate,
+      order.estimatedPreparedDate
     );
     query.select(select);
     query.from(order);
@@ -189,7 +191,9 @@ public class ProductionOrderQueryJpa implements ProductionOrderQuery {
       order.receiveSiteId,
       order.receiveStationId,
       order.committedDate,
-      order.dueDate
+      order.dueDate,
+      order.preparedDate,
+      order.estimatedPreparedDate
     );
     query.select(select);
     query.from(order);

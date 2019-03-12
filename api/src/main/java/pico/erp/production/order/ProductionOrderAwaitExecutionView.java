@@ -53,6 +53,10 @@ public class ProductionOrderAwaitExecutionView {
 
   OffsetDateTime dueDate;
 
+  OffsetDateTime estimatedPreparedDate;
+
+  OffsetDateTime preparedDate;
+
 
   @Data
   @NoArgsConstructor
