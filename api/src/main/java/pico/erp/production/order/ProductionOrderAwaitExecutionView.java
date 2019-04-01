@@ -1,7 +1,7 @@
 package pico.erp.production.order;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,15 +47,15 @@ public class ProductionOrderAwaitExecutionView {
 
   StationId receiveStationId;
 
-  OffsetDateTime committedDate;
+  LocalDateTime committedDate;
 
-  OffsetDateTime acceptedDate;
+  LocalDateTime acceptedDate;
 
-  OffsetDateTime dueDate;
+  LocalDateTime dueDate;
 
-  OffsetDateTime estimatedPreparedDate;
+  LocalDateTime estimatedPreparedDate;
 
-  OffsetDateTime preparedDate;
+  LocalDateTime preparedDate;
 
 
   @Data
@@ -72,9 +72,9 @@ public class ProductionOrderAwaitExecutionView {
 
     ItemId itemId;
 
-    OffsetDateTime startDueDate;
+    LocalDateTime startDueDate;
 
-    OffsetDateTime endDueDate;
+    LocalDateTime endDueDate;
 
   }
 

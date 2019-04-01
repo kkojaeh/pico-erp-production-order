@@ -1,7 +1,7 @@
 package pico.erp.production.order;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -63,7 +63,7 @@ public interface ProductionOrderRequests {
 
     @Future
     @NotNull
-    OffsetDateTime dueDate;
+    LocalDateTime dueDate;
 
     @Valid
     @NotNull
@@ -83,7 +83,7 @@ public interface ProductionOrderRequests {
     UserId ordererId;
 
     @NotNull
-    OffsetDateTime estimatedPreparedDate;
+    LocalDateTime estimatedPreparedDate;
 
     public static CreateRequest from(ProductionOrderData data) {
       return CreateRequest.builder()
@@ -147,7 +147,7 @@ public interface ProductionOrderRequests {
 
     @Future
     @NotNull
-    OffsetDateTime dueDate;
+    LocalDateTime dueDate;
 
     @Valid
     CompanyId supplierId;
@@ -166,7 +166,7 @@ public interface ProductionOrderRequests {
     String remark;
 
     @NotNull
-    OffsetDateTime estimatedPreparedDate;
+    LocalDateTime estimatedPreparedDate;
 
   }
 

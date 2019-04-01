@@ -1,32 +1,39 @@
 package pico.erp.production.order
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import pico.erp.company.CompanyApplication
 import pico.erp.company.CompanyId
+import pico.erp.item.ItemApplication
 import pico.erp.item.ItemId
 import pico.erp.item.spec.ItemSpecCode
+import pico.erp.process.ProcessApplication
 import pico.erp.process.ProcessId
+import pico.erp.project.ProjectApplication
 import pico.erp.project.ProjectId
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.TestParentApplication
 import pico.erp.shared.data.UnitKind
+import pico.erp.user.UserApplication
 import pico.erp.user.UserId
+import pico.erp.warehouse.WarehouseApplication
 import pico.erp.warehouse.location.site.SiteId
 import pico.erp.warehouse.location.station.StationId
 import spock.lang.Specification
 
-import java.time.OffsetDateTime
+import java.time.LocalDateTime
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [ProductionOrderApplication, TestConfig])
+@SpringBootTestComponent(parent = TestParentApplication, siblings = [
+  UserApplication, ItemApplication, ProjectApplication, ProcessApplication,
+  CompanyApplication, WarehouseApplication
+])
 @Transactional
 @Rollback
 @ActiveProfiles("test")
-@Configuration
-@ComponentScan("pico.erp.config")
 class ProductionOrderServiceSpec extends Specification {
 
   @Autowired
@@ -38,7 +45,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def projectId = ProjectId.from("sample-project1")
 
-  def dueDate = OffsetDateTime.now().plusDays(7)
+  def dueDate = LocalDateTime.now().plusDays(7)
 
   def remark = "요청 비고"
 
@@ -54,7 +61,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def projectId2 = ProjectId.from("sample-project2")
 
-  def dueDate2 = OffsetDateTime.now().plusDays(8)
+  def dueDate2 = LocalDateTime.now().plusDays(8)
 
   def remark2 = "요청 비고2"
 
@@ -74,7 +81,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def unit = UnitKind.EA
 
-  def estimatedPreparedDate = OffsetDateTime.now().plusDays(5)
+  def estimatedPreparedDate = LocalDateTime.now().plusDays(5)
 
   def setup() {
     requestService.create(
