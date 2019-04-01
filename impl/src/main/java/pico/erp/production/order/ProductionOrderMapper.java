@@ -1,6 +1,7 @@
 package pico.erp.production.order;
 
 import java.util.Optional;
+import kkojaeh.spring.boot.component.Take;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -37,39 +38,32 @@ public abstract class ProductionOrderMapper {
   @Autowired
   protected AuditorAware<Auditor> auditorAware;
 
-  @Lazy
-  @Autowired
+  @Take
   protected ItemService itemService;
 
-  @Lazy
-  @Autowired
+  @Take
   protected ItemSpecService itemSpecService;
 
   @Autowired
   protected ProductionOrderCodeGenerator productionOrderCodeGenerator;
 
-  @Lazy
-  @Autowired
+  @Take
   private CompanyService companyService;
 
-  @Lazy
-  @Autowired
+  @Take
   private UserService userService;
 
   @Lazy
   @Autowired
   private ProductionOrderRepository productionOrderRepository;
 
-  @Lazy
-  @Autowired
+  @Take
   private ProjectService projectService;
 
-  @Lazy
-  @Autowired
+  @Take
   private SiteService siteService;
 
-  @Lazy
-  @Autowired
+  @Take
   private StationService stationService;
 
   protected Auditor auditor(UserId userId) {
