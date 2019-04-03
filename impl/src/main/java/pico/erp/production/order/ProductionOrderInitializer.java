@@ -1,7 +1,7 @@
 package pico.erp.production.order;
 
+import kkojaeh.spring.boot.component.ComponentAutowired;
 import kkojaeh.spring.boot.component.SpringBootComponentReadyEvent;
-import kkojaeh.spring.boot.component.Take;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -14,11 +14,11 @@ import pico.erp.user.group.GroupService;
 public class ProductionOrderInitializer implements
   ApplicationListener<SpringBootComponentReadyEvent> {
 
-  @Take
-  GroupService groupService;
+  @ComponentAutowired
+  private GroupService groupService;
 
   @Autowired
-  ProductionOrderProperties properties;
+  private ProductionOrderProperties properties;
 
   @Override
   public void onApplicationEvent(SpringBootComponentReadyEvent event) {
