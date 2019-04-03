@@ -1,5 +1,6 @@
 package pico.erp.production.order;
 
+import kkojaeh.spring.boot.component.ComponentBean;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,11 @@ import pico.erp.production.order.ProductionOrderRequests.PlanRequest;
 import pico.erp.production.order.ProductionOrderRequests.PrepareRequest;
 import pico.erp.production.order.ProductionOrderRequests.ProgressRequest;
 import pico.erp.production.order.ProductionOrderRequests.RejectRequest;
-import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
 @SuppressWarnings("Duplicates")
 @Service
-@Public
+@ComponentBean
 @Transactional
 @Validated
 public class ProductionOrderServiceLogic implements ProductionOrderService {
