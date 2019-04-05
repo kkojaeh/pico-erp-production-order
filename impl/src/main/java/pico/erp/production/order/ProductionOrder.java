@@ -2,7 +2,7 @@ package pico.erp.production.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import javax.persistence.Id;
 import lombok.AccessLevel;
@@ -58,7 +58,7 @@ public class ProductionOrder implements Serializable {
 
   ProjectId projectId;
 
-  LocalDateTime dueDate;
+  OffsetDateTime dueDate;
 
   CompanyId receiverId;
 
@@ -72,23 +72,23 @@ public class ProductionOrder implements Serializable {
 
   UserId accepterId;
 
-  LocalDateTime committedDate;
+  OffsetDateTime committedDate;
 
-  LocalDateTime acceptedDate;
+  OffsetDateTime acceptedDate;
 
-  LocalDateTime completedDate;
+  OffsetDateTime completedDate;
 
-  LocalDateTime rejectedDate;
+  OffsetDateTime rejectedDate;
 
-  LocalDateTime canceledDate;
+  OffsetDateTime canceledDate;
 
   ProductionOrderStatusKind status;
 
   String rejectedReason;
 
-  LocalDateTime estimatedPreparedDate;
+  OffsetDateTime estimatedPreparedDate;
 
-  LocalDateTime preparedDate;
+  OffsetDateTime preparedDate;
 
 
   public ProductionOrder() {
@@ -151,7 +151,7 @@ public class ProductionOrder implements Serializable {
     }
     this.status = ProductionOrderStatusKind.ACCEPTED;
     this.accepterId = request.getAccepterId();
-    this.acceptedDate = LocalDateTime.now();
+    this.acceptedDate = OffsetDateTime.now();
     return new ProductionOrderMessages.Accept.Response(
       Arrays.asList(new ProductionOrderEvents.AcceptedEvent(this.id))
     );
@@ -163,7 +163,7 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotCancelException();
     }
     this.status = ProductionOrderStatusKind.CANCELED;
-    this.canceledDate = LocalDateTime.now();
+    this.canceledDate = OffsetDateTime.now();
     return new ProductionOrderMessages.Cancel.Response(
       Arrays.asList(new ProductionOrderEvents.CanceledEvent(this.id))
     );
@@ -175,7 +175,7 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotCompleteException();
     }
     this.status = ProductionOrderStatusKind.COMPLETED;
-    this.completedDate = LocalDateTime.now();
+    this.completedDate = OffsetDateTime.now();
     return new ProductionOrderMessages.Complete.Response(
       Arrays.asList(new ProductionOrderEvents.CompletedEvent(this.id))
     );
@@ -187,7 +187,7 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotCommitException();
     }
     this.status = ProductionOrderStatusKind.COMMITTED;
-    this.committedDate = LocalDateTime.now();
+    this.committedDate = OffsetDateTime.now();
     return new ProductionOrderMessages.Commit.Response(
       Arrays.asList(new ProductionOrderEvents.CommittedEvent(this.id))
     );
@@ -217,7 +217,7 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotRejectException();
     }
     this.status = ProductionOrderStatusKind.REJECTED;
-    this.rejectedDate = LocalDateTime.now();
+    this.rejectedDate = OffsetDateTime.now();
     this.rejectedReason = request.getRejectedReason();
     return new ProductionOrderMessages.Reject.Response(
       Arrays.asList(new ProductionOrderEvents.RejectedEvent(this.id))
@@ -241,7 +241,7 @@ public class ProductionOrder implements Serializable {
       throw new ProductionOrderExceptions.CannotPrepareException();
     }
     this.status = ProductionOrderStatusKind.PREPARED;
-    this.preparedDate = LocalDateTime.now();
+    this.preparedDate = OffsetDateTime.now();
     return new ProductionOrderMessages.Prepare.Response(
       Arrays.asList(new ProductionOrderEvents.PreparedEvent(this.id))
     );

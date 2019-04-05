@@ -1,7 +1,7 @@
 package pico.erp.production.order;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,7 +50,7 @@ public class ProductionOrderData {
 
   String rejectedReason;
 
-  LocalDateTime dueDate;
+  OffsetDateTime dueDate;
 
   CompanyId receiverId;
 
@@ -58,21 +58,21 @@ public class ProductionOrderData {
 
   StationId receiveStationId;
 
-  LocalDateTime committedDate;
+  OffsetDateTime committedDate;
 
-  LocalDateTime completedDate;
+  OffsetDateTime completedDate;
 
-  LocalDateTime acceptedDate;
+  OffsetDateTime acceptedDate;
 
-  LocalDateTime rejectedDate;
+  OffsetDateTime rejectedDate;
 
-  LocalDateTime canceledDate;
+  OffsetDateTime canceledDate;
 
   ProductionOrderStatusKind status;
 
-  LocalDateTime estimatedPreparedDate;
+  OffsetDateTime estimatedPreparedDate;
 
-  LocalDateTime preparedDate;
+  OffsetDateTime preparedDate;
 
   String remark;
 

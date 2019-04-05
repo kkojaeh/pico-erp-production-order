@@ -19,7 +19,7 @@ import pico.erp.warehouse.location.site.SiteId
 import pico.erp.warehouse.location.station.StationId
 import spock.lang.Specification
 
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 @SpringBootTest(classes = [ProductionOrderApplication, TestConfig])
 @SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
@@ -37,7 +37,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def projectId = ProjectId.from("sample-project1")
 
-  def dueDate = LocalDateTime.now().plusDays(7)
+  def dueDate = OffsetDateTime.now().plusDays(7)
 
   def remark = "요청 비고"
 
@@ -53,7 +53,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def projectId2 = ProjectId.from("sample-project2")
 
-  def dueDate2 = LocalDateTime.now().plusDays(8)
+  def dueDate2 = OffsetDateTime.now().plusDays(8)
 
   def remark2 = "요청 비고2"
 
@@ -73,7 +73,7 @@ class ProductionOrderServiceSpec extends Specification {
 
   def unit = UnitKind.EA
 
-  def estimatedPreparedDate = LocalDateTime.now().plusDays(5)
+  def estimatedPreparedDate = OffsetDateTime.now().plusDays(5)
 
   def setup() {
     requestService.create(
